@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Smart Home</string>
+    <string name="pick_color">Pick Color from Image</string>
+    <string name="wheel_color_picker">Wheel Color Picker</string>
+    <string name="camera_dialog">Camera</string>
+    <string name="galery_dialog">Galery</string>
+    <string name="title_dialog">You want to pick color from ... ?</string>
+    <string name="label_rgb">rbg code</string>
+    <string name="label_hex">hex code</string>
+    <string name="default_status">Not connected yet</string>
+    <string name="hint_edit1">Server address</string>
+    <string name="hint_edit2">Server Port</string>
+    <string name="text_button_connect">Connect</string>
+    <string name="hint_messages">Messages</string>
+    <string name="text_button_disconnect">Disconnect</string>
+
+    <string name="toolbar_status_connected">Connected</string>
+    <string name="toolbar_status_disconnect">Disconnected</string>
+    <string name="toolbar_status_error">Error</string>s
+
+    <!--ip address & port default-->
+    <string name="default_ip">192.168.27.6</string>
+    <string name="default_port">8887</string>
+
+    <!--login view-->
+    <string name="username_editText">Username</string>
+    <string name="password_editText">Password</string>
+    <string name="remember_check">Remember</string>
+
+    <string name="login_btn">Login</string>
+    <string name="logout_btn">Logout</string>
+
+    <string name="title_home_1">Home 1</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_home_2">Home 2</string>
+    <string name="alert_status">ALERT</string>
+    <string name="alert_fire">Your house is ON FIRE!</string>
+    <string name="alert_gas">Detected GAS LEAK inside your house!</string>
+</resources>
