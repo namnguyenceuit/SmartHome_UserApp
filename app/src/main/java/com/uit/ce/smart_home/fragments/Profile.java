@@ -31,7 +31,7 @@ public class Profile extends Fragment {
             public void onClick(View view) {
                 try{
                     ConnectServerService.client.send("logout/"+ConnectServerService.user.getId().toString());
-
+                    LoginActivity.isLoggedOut = true;
                     Intent intent = new Intent(getActivity(), LoginActivity.class);
                     startActivity(intent);
                 }

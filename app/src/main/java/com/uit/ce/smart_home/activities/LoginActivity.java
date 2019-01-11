@@ -4,6 +4,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -28,6 +30,7 @@ import static com.uit.ce.smart_home.services.ConnectServerService.ACTION_LOGIN;
 import static com.uit.ce.smart_home.services.ConnectServerService.ACTION_START_SERVICE;
 import static com.uit.ce.smart_home.services.ConnectServerService.APP_PASSWORD;
 import static com.uit.ce.smart_home.services.ConnectServerService.APP_USERNAME;
+import static com.uit.ce.smart_home.services.ConnectServerService.IS_NETWORK_CONNECTED;
 import static com.uit.ce.smart_home.services.ConnectServerService.LOGIN_ALREADY;
 import static com.uit.ce.smart_home.services.ConnectServerService.LOGIN_FAIL;
 import static com.uit.ce.smart_home.services.ConnectServerService.LOGIN_SUCCESS;
@@ -40,7 +43,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public static final int CONNECTED = 1;
     public static final int DISCONNECTED = 0;
 
-
+    public static boolean isLoggedOut = false;
     public static WebSocketClient client;
     public static User user;
 
@@ -91,10 +94,43 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     };
 
+    private BroadcastReceiver networkStateReceiver=new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            ConnectivityManager manager = (ConnectivityManager)
+                    context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo activeNetwork = manager.getActiveNetworkInfo();
+            if (activeNetwork != null && activeNetwork.isConnected()) {
+                // if online
+                if ((toolbarSubTitle.getText().equals("No Internet connection"))
+                        || (toolbarSubTitle.getText().equals("Disconnected"))) {
+                    toolbarSubTitle.setText("Tab to reconnect");
+                    toolbarSubTitle.setOnClickListener(new View.OnClickListener() {
+                        private boolean clickStateChanged;
+                        @Override
+                        public void onClick(View view) {
+                            ReconnectServer();
+                            if(clickStateChanged) {
+                                // reset background to default;
+                            } else {
+                                Toast.makeText(LoginActivity.this,"Trying to reconnect...", Toast.LENGTH_SHORT).show();
+                            }
+                            clickStateChanged = !clickStateChanged;
+                        }
+                    });
+                }
+            } else {
+                // if not online
+                toolbarSubTitle.setText("No Internet connection");
+            }
+        }
+    };
+
     @Override
     protected void onResume() {
         super.onResume();
 
+        registerReceiver(networkStateReceiver, new IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION));
         registerReceiver(UpdateInternetService, LoginIntentFilter());
     }
 
@@ -102,30 +138,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onPause() {
         super.onPause();
         unregisterReceiver(UpdateInternetService);
+        unregisterReceiver(networkStateReceiver);
     }
-
-
-//    private BroadcastReceiver networkStateReceiver=new BroadcastReceiver() {
-//        @Override
-//        public void onReceive(Context context, Intent intent) {
-//            ConnectivityManager manager = (ConnectivityManager)
-//                    context.getSystemService(Context.CONNECTIVITY_SERVICE);
-//            NetworkInfo ni = manager.getActiveNetworkInfo();
-//        }
-//    };
-//
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        registerReceiver(networkStateReceiver, new IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION));
-//    }
-//
-//    @Override
-//    public void onPause() {
-//        unregisterReceiver(networkStateReceiver);
-//        super.onPause();
-//        STATUS = RECONNECTED;
-//    }
 
     @Override
     public void onClick(View view) {
@@ -161,6 +175,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         return intentFilter;
     }
 
+    private void ReconnectServer() {
+        Intent reconnect = new Intent(getApplicationContext(), ConnectServerService.class);
+        reconnect.setAction(IS_NETWORK_CONNECTED);
+        startService(reconnect);
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public void InitialView(){
 
@@ -177,6 +197,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         button_login.setOnClickListener(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        if (isLoggedOut) {
+            toolbarSubTitle.setText("Connected");
+            isLoggedOut = false;
+        }
     }
 
     @Override

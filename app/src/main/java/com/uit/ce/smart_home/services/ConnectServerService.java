@@ -33,6 +33,7 @@ public class ConnectServerService extends Service {
     static final int NOTIFICATION_ID = 543;
     public final static String ACTION_START_SERVICE = "START_SERVICE";
     public final static String ACTION_LOGIN = "LOGIN";
+    public final static String IS_NETWORK_CONNECTED = "IS_NETWORK_CONNECTED";
     public final static String APP_USERNAME = "USERNAME";
     public final static String APP_PASSWORD = "PASSWORD";
     public final static String LOGIN_SUCCESS = "LOGIN_SUCCESS";
@@ -58,6 +59,7 @@ public class ConnectServerService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent != null && intent.getAction() != null && intent.getAction().equals(ACTION_START_SERVICE)) {
+
         } else if (intent != null && intent.getAction() != null && intent.getAction().equals(ACTION_LOGIN)) {
             String name = intent.getStringExtra(APP_USERNAME);
             String pass = intent.getStringExtra(APP_PASSWORD);
@@ -65,7 +67,11 @@ public class ConnectServerService extends Service {
         } else if (intent != null && intent.getAction() != null && intent.getAction().equals(CLOSE_SOCKET)) {
             client.close();
             stopMyService();
+        } else if (intent != null && intent.getAction() != null &&
+                intent.getAction().equals(IS_NETWORK_CONNECTED)) {
+            client.reconnect();
         } else stopMyService();
+
         return START_STICKY;
     }
 
@@ -97,7 +103,7 @@ public class ConnectServerService extends Service {
         isServiceRunning = true;
         String chanID = "";
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            chanID = createNotificationChannel("7437", "SmartHome notification channel");
+            chanID = createNotificationChannel("7437", "SmartHome service");
         } else {
         }
 
@@ -161,20 +167,8 @@ public class ConnectServerService extends Service {
 
                         } else if (response[1].equals("2")) {
                             broadcastUpdateExtra(LOGIN_ALREADY);
-//                                connectView.post(new Runnable() {
-//                                    @Override
-//                                    public void run() {
-//                                        Toast.makeText(LoginActivity.this, "Account is already logged in", Toast.LENGTH_SHORT).show();
-//                                    }
-//                                });
                         } else {
                             broadcastUpdateExtra(LOGIN_FAIL);
-//                                connectView.post(new Runnable() {
-//                                    @Override
-//                                    public void run() {
-//                                        Toast.makeText(LoginActivity.this, "Wrong username/password", Toast.LENGTH_SHORT).show();
-//                                    }
-//                                });
                         }
                         break;
 
@@ -184,24 +178,16 @@ public class ConnectServerService extends Service {
                         user = new User();
                         user = UserConverter.toUser(userDBObject);
                         broadcastUpdateExtra(LOGIN_SUCCESS);
-
                         break;
 
                     case "messageRes":
                         broadcastUpdateMessage(MESSAGE_RESPOND, response[1]);
-
-//                            connectView.post(new Runnable() {
-//                                @Override
-//                                public void run() {
-//                                    Toast.makeText(LoginActivity.this, response[1], Toast.LENGTH_SHORT).show();
-//                                }
-//                            });
                         break;
+
                     case "update":
                         DBObject userUpdate = (DBObject) JSON.parse(response[1]);
                         user = UserConverter.toUser(userUpdate);
                         broadcastUpdateExtra(MESSAGE_UPDATE);
-//                            Toast.makeText(LoginActivity.this, "update", Toast.LENGTH_SHORT).show();
                         break;
                 }
             }
