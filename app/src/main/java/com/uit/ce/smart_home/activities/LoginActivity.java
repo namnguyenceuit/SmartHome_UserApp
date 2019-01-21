@@ -35,13 +35,11 @@ import static com.uit.ce.smart_home.services.ConnectServerService.LOGIN_ALREADY;
 import static com.uit.ce.smart_home.services.ConnectServerService.LOGIN_FAIL;
 import static com.uit.ce.smart_home.services.ConnectServerService.LOGIN_SUCCESS;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String TAG = "Tag";
     public static int STATUS = 0;
-    public static final int RECONNECTED = 2;
     public static final int CONNECTED = 1;
-    public static final int DISCONNECTED = 0;
 
     public static boolean isLoggedOut = false;
     public static WebSocketClient client;
@@ -61,7 +59,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState){
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -76,25 +74,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
 
-            if(LOGIN_SUCCESS.equals(action))
-            {
+            if (LOGIN_SUCCESS.equals(action)) {
                 STATUS = CONNECTED;
                 Intent intentReceived = new Intent(LoginActivity.this, MainActivity.class);
                 finish();
                 LoginActivity.this.startActivity(intentReceived);
             }
 
-            if(LOGIN_ALREADY.equals(action)) {
-                Toast.makeText(LoginActivity.this,"Account is already logged in", Toast.LENGTH_SHORT).show();
+            if (LOGIN_ALREADY.equals(action)) {
+                Toast.makeText(LoginActivity.this, "Account is already logged in", Toast.LENGTH_SHORT).show();
             }
 
-            if(LOGIN_FAIL.equals(action)) {
-                Toast.makeText(LoginActivity.this,"Wrong username/password", Toast.LENGTH_SHORT).show();
+            if (LOGIN_FAIL.equals(action)) {
+                Toast.makeText(LoginActivity.this, "Wrong username/password", Toast.LENGTH_SHORT).show();
             }
         }
     };
 
-    private BroadcastReceiver networkStateReceiver=new BroadcastReceiver() {
+    private BroadcastReceiver networkStateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             ConnectivityManager manager = (ConnectivityManager)
@@ -102,18 +99,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             NetworkInfo activeNetwork = manager.getActiveNetworkInfo();
             if (activeNetwork != null && activeNetwork.isConnected()) {
                 // if online
-                if ((toolbarSubTitle.getText().equals("No Internet connection"))
-                        || (toolbarSubTitle.getText().equals("Disconnected"))) {
+                if (!toolbarSubTitle.getText().equals("Connected")) {
                     toolbarSubTitle.setText("Tab to reconnect");
                     toolbarSubTitle.setOnClickListener(new View.OnClickListener() {
                         private boolean clickStateChanged;
+
                         @Override
                         public void onClick(View view) {
                             ReconnectServer();
-                            if(clickStateChanged) {
+                            if (clickStateChanged) {
                                 // reset background to default;
                             } else {
-                                Toast.makeText(LoginActivity.this,"Trying to reconnect...", Toast.LENGTH_SHORT).show();
+                                toolbarSubTitle.setText("Trying to reconnect...");
                             }
                             clickStateChanged = !clickStateChanged;
                         }
@@ -143,21 +140,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.btn_login:
                 LoginServer();
-//                if(STATUS == CONNECTED){
-//
-//                }
-//                else {
-//                    Toast.makeText(this, "Please check your internet connection", Toast.LENGTH_SHORT).show();
-//                }
-//                break;
+                if (!toolbarSubTitle.getText().equals("Connected")) {
+                    Toast.makeText(LoginActivity.this, "Please check your internet connection", Toast.LENGTH_SHORT).show();
+                }
         }
     }
 
-    private void LoginServer()
-    {
+    private void LoginServer() {
         String username = editText_username.getText().toString();
         String password = editText_password.getText().toString();
         loginIntent = new Intent(getApplicationContext(), ConnectServerService.class);
@@ -182,7 +174,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-    public void InitialView(){
+    public void InitialView() {
 
         loginView = findViewById(R.id.loginview);
         connectView = findViewById(R.id.connect_view);

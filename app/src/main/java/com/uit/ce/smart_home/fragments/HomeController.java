@@ -116,12 +116,11 @@ public class HomeController extends Fragment {
 
         createNotification();
 
-        if (Integer.parseInt(UserConverter.getTeamperatureValue(mac_address)) > 30 ) {
+        if (Integer.parseInt(UserConverter.getTeamperatureValue(mac_address)) > 30) {
             textView_temperature.setText(UserConverter.getTeamperatureValue(mac_address));
             textView_temperature.setTextColor(getResources().getColor(R.color.hot_temp_color));
             textView_celsius.setTextColor(getResources().getColor(R.color.hot_temp_color));
-        }
-        else {
+        } else {
             textView_temperature.setText(UserConverter.getTeamperatureValue(mac_address));
             textView_temperature.setTextColor(getResources().getColor(R.color.defaut_temp));
             textView_celsius.setTextColor(getResources().getColor(R.color.defaut_temp));
@@ -130,13 +129,12 @@ public class HomeController extends Fragment {
             textView_gas.setText(UserConverter.getGasStatus(mac_address));
             textView_gas.setTextColor(Color.RED);
             notificationManager.notify(1, mBuilder1.build());
-            if(mMediaPlayer.isPlaying() == false){
+            if (mMediaPlayer.isPlaying() == false) {
                 mMediaPlayer.start();
             }
             vibrator.vibrate(3000);
             button_resetGas.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             textView_gas.setText(UserConverter.getGasStatus(mac_address));
             textView_gas.setTextColor(getResources().getColor(R.color.safe_color));
         }
@@ -146,13 +144,12 @@ public class HomeController extends Fragment {
             textView_fire.setTextColor(Color.RED);
             // notification
             notificationManager.notify(0, mBuilder.build());
-            if(mMediaPlayer.isPlaying() == false){
+            if (mMediaPlayer.isPlaying() == false) {
                 mMediaPlayer.start();
             }
             vibrator.vibrate(1000);
             button_resetFire.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             textView_fire.setText(UserConverter.getFireStatus(mac_address));
             textView_fire.setTextColor(getResources().getColor(R.color.safe_color));
         }
@@ -192,20 +189,16 @@ public class HomeController extends Fragment {
         switchButton_11.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
-                if (isChecked)
-                {
+                if (isChecked) {
                     try {
                         ConnectServerService.client.send("switch/" + mac_address + "/" + MSG_OPCODE_SWITCH_ON_11);
-                    }
-                    catch (Exception e) {
+                    } catch (Exception e) {
 
                     }
-                }
-                else {
+                } else {
                     try {
                         ConnectServerService.client.send("switch/" + mac_address + "/" + MSG_OPCODE_SWITCH_OFF_11);
-                    }
-                    catch (Exception e) {
+                    } catch (Exception e) {
 
                     }
                 }
@@ -215,20 +208,16 @@ public class HomeController extends Fragment {
         switchButton_12.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
-                if (isChecked)
-                {
+                if (isChecked) {
                     try {
                         ConnectServerService.client.send("switch/" + mac_address + "/" + MSG_OPCODE_SWITCH_ON_12);
-                    }
-                    catch (Exception e) {
+                    } catch (Exception e) {
 
                     }
-                }
-                else {
+                } else {
                     try {
                         ConnectServerService.client.send("switch/" + mac_address + "/" + MSG_OPCODE_SWITCH_OFF_12);
-                    }
-                    catch (Exception e) {
+                    } catch (Exception e) {
 
                     }
                 }
@@ -238,20 +227,16 @@ public class HomeController extends Fragment {
         switchButton_13.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
-                if (isChecked)
-                {
+                if (isChecked) {
                     try {
                         ConnectServerService.client.send("switch/" + mac_address + "/" + MSG_OPCODE_SWITCH_ON_13);
-                    }
-                    catch (Exception e) {
+                    } catch (Exception e) {
 
                     }
-                }
-                else {
+                } else {
                     try {
                         ConnectServerService.client.send("switch/" + mac_address + "/" + MSG_OPCODE_SWITCH_OFF_13);
-                    }
-                    catch (Exception e) {
+                    } catch (Exception e) {
 
                     }
                 }
@@ -261,20 +246,16 @@ public class HomeController extends Fragment {
         switchButton_14.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
-                if (isChecked)
-                {
+                if (isChecked) {
                     try {
                         ConnectServerService.client.send("switch/" + mac_address + "/" + MSG_OPCODE_SWITCH_ON_14);
-                    }
-                    catch (Exception e) {
+                    } catch (Exception e) {
 
                     }
-                }
-                else {
+                } else {
                     try {
                         ConnectServerService.client.send("switch/" + mac_address + "/" + MSG_OPCODE_SWITCH_OFF_14);
-                    }
-                    catch (Exception e) {
+                    } catch (Exception e) {
 
                     }
                 }
@@ -284,20 +265,16 @@ public class HomeController extends Fragment {
         switchButton_21.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
-                if (isChecked)
-                {
+                if (isChecked) {
                     try {
                         ConnectServerService.client.send("switch/" + mac_address + "/" + MSG_OPCODE_SWITCH_ON_21);
-                    }
-                    catch (Exception e) {
+                    } catch (Exception e) {
 
                     }
-                }
-                else {
+                } else {
                     try {
                         ConnectServerService.client.send("switch/" + mac_address + "/" + MSG_OPCODE_SWITCH_OFF_21);
-                    }
-                    catch (Exception e) {
+                    } catch (Exception e) {
 
                     }
                 }
@@ -307,20 +284,16 @@ public class HomeController extends Fragment {
         switchButton_22.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
-                if (isChecked)
-                {
+                if (isChecked) {
                     try {
                         ConnectServerService.client.send("switch/" + mac_address + "/" + MSG_OPCODE_SWITCH_ON_22);
-                    }
-                    catch (Exception e) {
+                    } catch (Exception e) {
 
                     }
-                }
-                else {
+                } else {
                     try {
                         ConnectServerService.client.send("switch/" + mac_address + "/" + MSG_OPCODE_SWITCH_OFF_22);
-                    }
-                    catch (Exception e) {
+                    } catch (Exception e) {
 
                     }
                 }
@@ -330,20 +303,16 @@ public class HomeController extends Fragment {
         switchButton_23.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
-                if (isChecked)
-                {
+                if (isChecked) {
                     try {
                         ConnectServerService.client.send("switch/" + mac_address + "/" + MSG_OPCODE_SWITCH_ON_23);
-                    }
-                    catch (Exception e) {
+                    } catch (Exception e) {
 
                     }
-                }
-                else {
+                } else {
                     try {
                         ConnectServerService.client.send("switch/" + mac_address + "/" + MSG_OPCODE_SWITCH_OFF_23);
-                    }
-                    catch (Exception e) {
+                    } catch (Exception e) {
 
                     }
                 }
@@ -353,20 +322,16 @@ public class HomeController extends Fragment {
         switchButton_24.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
-                if (isChecked)
-                {
+                if (isChecked) {
                     try {
                         ConnectServerService.client.send("switch/" + mac_address + "/" + MSG_OPCODE_SWITCH_ON_24);
-                    }
-                    catch (Exception e) {
+                    } catch (Exception e) {
 
                     }
-                }
-                else {
+                } else {
                     try {
                         ConnectServerService.client.send("switch/" + mac_address + "/" + MSG_OPCODE_SWITCH_OFF_24);
-                    }
-                    catch (Exception e) {
+                    } catch (Exception e) {
 
                     }
                 }
@@ -376,7 +341,8 @@ public class HomeController extends Fragment {
         new updateUI().execute();
         return view;
     }
-    private class updateUI extends AsyncTask<Void, String, Void>{
+
+    private class updateUI extends AsyncTask<Void, String, Void> {
 
         @Override
         protected void onPreExecute() {
@@ -393,44 +359,41 @@ public class HomeController extends Fragment {
             String statusButtonResetGas = String.valueOf(button_resetGas.getVisibility());
             String colorFire = String.valueOf(textView_fire.getCurrentTextColor());
             String colorGas = String.valueOf(textView_gas.getCurrentTextColor());
-            while(true){
+            while (true) {
                 try {
                     Thread.sleep(3000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 List<Device> devices = ConnectServerService.user.getHomes().get(0).getDevices();
-                for(Device device : devices){
-                    if(device.getType().equals("temperature")){
+                for (Device device : devices) {
+                    if (device.getType().equals("temperature")) {
                         Temperature temperature = (Temperature) device;
-                        if(!temperature.getValue().equals(string_temp)) {
+                        if (!temperature.getValue().equals(string_temp)) {
                             string_temp = temperature.getValue();
-                            if(Integer.parseInt(string_temp) > 30){
+                            if (Integer.parseInt(string_temp) > 30) {
                                 colorTeamperate = String.valueOf(getResources().getColor(R.color.hot_temp_color));
-                            }
-                            else{
+                            } else {
                                 colorTeamperate = String.valueOf(getResources().getColor(R.color.defaut_temp));
                             }
                         }
-                    }
-                    else if(device.getType().equals("fire")){
+                    } else if (device.getType().equals("fire")) {
                         Fire fire = (Fire) device;
-                        if(!fire.getStatus().equals(string_fire)){
+                        if (!fire.getStatus().equals(string_fire)) {
                             string_fire = fire.getStatus();
-                            if(fire.getStatus().equals("DETECTED")){
+                            if (fire.getStatus().equals("DETECTED")) {
                                 statusButtonResetFire = String.valueOf(View.VISIBLE);
                                 colorFire = String.valueOf(Color.RED);
                                 // notification
                                 notificationManager.notify(0, mBuilder.build());
                                 vibrator.vibrate(1000);
-                                if(!mMediaPlayer.isPlaying())
+                                if (!mMediaPlayer.isPlaying())
                                     mMediaPlayer.start();
-                            }
-                            else{
+                            } else {
                                 statusButtonResetFire = String.valueOf(View.INVISIBLE);
-                                colorFire = String.valueOf(getResources().getColor(R.color.safe_color));
+                                colorFire = String.valueOf(Color.parseColor("#51d367"));
                                 notificationManager.cancel(0);
-                                if(mMediaPlayer.isPlaying()){
+                                if (mMediaPlayer.isPlaying()) {
                                     mMediaPlayer.stop();
                                     try {
                                         mMediaPlayer.prepare();
@@ -440,25 +403,23 @@ public class HomeController extends Fragment {
                                 }
                             }
                         }
-                    }
-                    else if(device.getType().equals("gas")){
+                    } else if (device.getType().equals("gas")) {
                         Gas gas = (Gas) device;
-                        if(!gas.getStatus().equals(string_gas)){
+                        if (!gas.getStatus().equals(string_gas)) {
                             string_gas = gas.getStatus();
-                            if(gas.getStatus().equals("DETECTED")){
+                            if (gas.getStatus().equals("DETECTED")) {
                                 statusButtonResetGas = String.valueOf(View.VISIBLE);
                                 colorGas = String.valueOf(Color.RED);
                                 // notification
                                 notificationManager.notify(1, mBuilder1.build());
                                 vibrator.vibrate(1000);
-                                if(!mMediaPlayer.isPlaying())
+                                if (!mMediaPlayer.isPlaying())
                                     mMediaPlayer.start();
-                            }
-                            else{
+                            } else {
                                 statusButtonResetGas = String.valueOf(View.INVISIBLE);
-                                colorGas = String.valueOf(getResources().getColor(R.color.safe_color));
+                                colorGas = String.valueOf(Color.parseColor("#51d367"));
                                 notificationManager.cancel(1);
-                                if(mMediaPlayer.isPlaying()){
+                                if (mMediaPlayer.isPlaying()) {
                                     mMediaPlayer.stop();
                                     try {
                                         mMediaPlayer.prepare();
@@ -490,7 +451,8 @@ public class HomeController extends Fragment {
             textView_gas.setTextColor(Integer.parseInt(values[7]));
         }
     }
-    private void createNotification(){
+
+    private void createNotification() {
         // Create an explicit intent for an Activity in your app
         Intent intent = new Intent(this.getContext(), AlertFireActivity.class);
         Intent intent1 = new Intent(this.getContext(), AlertGasActivity.class);
@@ -522,8 +484,7 @@ public class HomeController extends Fragment {
                 mMediaPlayer.setLooping(true);
                 mMediaPlayer.prepare();
             }
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         // create notification for fire
