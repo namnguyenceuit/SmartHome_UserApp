@@ -122,8 +122,8 @@ public class HomeController extends Fragment {
             textView_celsius.setTextColor(getResources().getColor(R.color.hot_temp_color));
         } else {
             textView_temperature.setText(UserConverter.getTeamperatureValue(mac_address));
-            textView_temperature.setTextColor(getResources().getColor(R.color.defaut_temp));
-            textView_celsius.setTextColor(getResources().getColor(R.color.defaut_temp));
+            textView_temperature.setTextColor(getResources().getColor(R.color.default_temp_color));
+            textView_celsius.setTextColor(getResources().getColor(R.color.default_temp_color));
         }
         if (UserConverter.getGasStatus(mac_address).equals("DETECTED")) {
             textView_gas.setText(UserConverter.getGasStatus(mac_address));
@@ -352,7 +352,7 @@ public class HomeController extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
             String string_temp = (String) textView_temperature.getText();
-            String colorTeamperate = String.valueOf(textView_temperature.getCurrentTextColor());
+            String colorTemperature = String.valueOf(textView_temperature.getCurrentTextColor());
             String string_fire = (String) textView_fire.getText();
             String string_gas = (String) textView_gas.getText();
             String statusButtonResetFire = String.valueOf(button_resetFire.getVisibility());
@@ -372,9 +372,9 @@ public class HomeController extends Fragment {
                         if (!temperature.getValue().equals(string_temp)) {
                             string_temp = temperature.getValue();
                             if (Integer.parseInt(string_temp) > 30) {
-                                colorTeamperate = String.valueOf(getResources().getColor(R.color.hot_temp_color));
+                                colorTemperature = String.valueOf(Color.parseColor("#ffaf1a"));
                             } else {
-                                colorTeamperate = String.valueOf(getResources().getColor(R.color.defaut_temp));
+                                colorTemperature = String.valueOf(Color.parseColor("#1ba0e2"));
                             }
                         }
                     } else if (device.getType().equals("fire")) {
@@ -431,7 +431,7 @@ public class HomeController extends Fragment {
                         }
                     }
                 }
-                publishProgress(string_temp, colorTeamperate, string_fire, statusButtonResetFire, colorFire, string_gas, statusButtonResetGas, colorGas);
+                publishProgress(string_temp, colorTemperature, string_fire, statusButtonResetFire, colorFire, string_gas, statusButtonResetGas, colorGas);
             }
         }
 
@@ -474,7 +474,7 @@ public class HomeController extends Fragment {
         // Vibrator
         vibrator = (Vibrator) this.getActivity().getSystemService(this.getContext().VIBRATOR_SERVICE);
         // Alert notification
-        Uri ringTone = Uri.parse("android.resource://com.uit.thonglee.smartlight_userapp/" + R.raw.alert_ringing);
+        Uri ringTone = Uri.parse("android.resource://com.uit.ce.smart_home/" + R.raw.alert_ringing);
         mMediaPlayer = new MediaPlayer();
         try {
             mMediaPlayer.setDataSource(this.getContext(), ringTone);

@@ -3,180 +3,204 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:layout_marginTop="10dp"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:stateListAnimator="@null"
-        android:background="@drawable/item_border"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:padding="@dimen/activity_vertical_margin">
+        android:background="@drawable/item_border"
+        android:padding="@dimen/activity_vertical_margin"
+        android:stateListAnimator="@null">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginRight="5dp"
-                android:background="@drawable/icon_temperature"/>
+                android:background="@drawable/icon_temperature" />
+
             <TextView
-                android:text="Current temperature: "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="5dp"
+                android:fontFamily="@font/samsungsans"
+                android:text="Current temperature: "
                 android:textColor="@android:color/black"
-                android:textSize="20sp"
-                android:fontFamily="@font/samsungsans" />
+                android:textSize="20sp" />
+
             <TextView
                 android:id="@+id/txtv_temperature"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/defaut_temp"
-                android:textSize="22sp"
                 android:fontFamily="@font/samsungsans"
-                android:textStyle="bold"/>
+                android:textColor="@color/default_temp_color"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/txtv_celsius"
-                android:text="°C"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/defaut_temp"
-                android:textSize="22sp"
                 android:fontFamily="@font/samsungsans"
-                android:textStyle="bold"/>
+                android:text="°C"
+                android:textColor="@color/default_temp_color"
+                android:textSize="22sp"
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:stateListAnimator="@null"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/item_border"
-        android:padding="@dimen/activity_vertical_margin">
+        android:padding="@dimen/activity_vertical_margin"
+        android:stateListAnimator="@null">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginRight="5dp"
-                android:background="@drawable/icon_flame"/>
+                android:background="@drawable/icon_flame" />
+
             <TextView
-                android:text="Fire situation: "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="5dp"
+                android:fontFamily="@font/samsungsans"
+                android:text="Fire situation: "
                 android:textColor="@android:color/black"
-                android:textSize="20sp"
-                android:fontFamily="@font/samsungsans" />
+                android:textSize="20sp" />
+
             <TextView
                 android:id="@+id/txtv_fire"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="22sp"
                 android:layout_gravity="center_vertical"
                 android:fontFamily="@font/samsungsans"
-                android:textStyle="bold"/>
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+
                 <ImageButton
                     android:id="@+id/btn_resetFire"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/clear_state_border"
-                    android:visibility="invisible"
-                    android:src="@drawable/ic_reset_state"/>
+                    android:src="@drawable/ic_reset_state"
+                    android:visibility="invisible" />
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:stateListAnimator="@null"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/item_border"
-        android:padding="@dimen/activity_vertical_margin">
+        android:padding="@dimen/activity_vertical_margin"
+        android:stateListAnimator="@null">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginRight="5dp"
-                android:background="@drawable/icon_gas"/>
+                android:background="@drawable/icon_gas" />
+
             <TextView
-                android:text="Gas situation: "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="5dp"
+                android:fontFamily="@font/samsungsans"
+                android:text="Gas situation: "
                 android:textColor="@android:color/black"
-                android:textSize="20sp"
-                android:fontFamily="@font/samsungsans" />
+                android:textSize="20sp" />
+
             <TextView
                 android:id="@+id/txtv_gas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="22sp"
                 android:layout_gravity="center_vertical"
                 android:fontFamily="@font/samsungsans"
-                android:textStyle="bold"/>
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+
                 <ImageButton
                     android:id="@+id/btn_resetGas"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:visibility="invisible"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/clear_state_border"
-                    android:src="@drawable/ic_reset_state"/>
+                    android:src="@drawable/ic_reset_state"
+                    android:visibility="invisible" />
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:stateListAnimator="@null"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
-        android:orientation="vertical"
         android:background="@drawable/item_border"
-        android:padding="@dimen/activity_vertical_margin">
+        android:orientation="vertical"
+        android:padding="@dimen/activity_vertical_margin"
+        android:stateListAnimator="@null">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginRight="5dp"
-                android:background="@drawable/icon_switch"/>
+                android:background="@drawable/icon_switch" />
+
             <TextView
-                android:text="Switch controller"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="5dp"
+                android:fontFamily="@font/samsungsans"
+                android:text="Switch controller"
                 android:textColor="@android:color/black"
-                android:textSize="20sp"
-                android:fontFamily="@font/samsungsans" />
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -184,85 +208,95 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/switch_border"
-                android:layout_marginRight="5dp"
                 android:orientation="horizontal">
+
                 <TextView
                     android:id="@+id/txtv_switch11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:layout_gravity="center"/>
+                    android:textColor="@android:color/black" />
+
                 <com.suke.widget.SwitchButton
                     android:id="@+id/switch_button_11"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/switch_border"
-                android:layout_marginLeft="5dp"
                 android:orientation="horizontal">
+
                 <TextView
                     android:id="@+id/txtv_switch21"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:layout_gravity="center"/>
+                    android:textColor="@android:color/black" />
+
                 <com.suke.widget.SwitchButton
                     android:id="@+id/switch_button_21"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/switch_border"
-                android:layout_marginRight="5dp"
                 android:orientation="horizontal">
+
                 <TextView
                     android:id="@+id/txtv_switch12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:layout_gravity="center"/>
+                    android:textColor="@android:color/black" />
+
                 <com.suke.widget.SwitchButton
                     android:id="@+id/switch_button_12"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/switch_border"
-                android:layout_marginLeft="5dp"
                 android:orientation="horizontal">
+
                 <TextView
                     android:id="@+id/txtv_switch22"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:layout_gravity="center_vertical"/>
+                    android:textColor="@android:color/black" />
 
                 <com.suke.widget.SwitchButton
                     android:id="@+id/switch_button_22"
@@ -270,94 +304,106 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/switch_border"
-                android:layout_marginRight="5dp"
                 android:orientation="horizontal">
+
                 <TextView
                     android:id="@+id/txtv_switch13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:layout_gravity="center_vertical"/>
+                    android:textColor="@android:color/black" />
+
                 <com.suke.widget.SwitchButton
                     android:id="@+id/switch_button_13"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/switch_border"
-                android:layout_marginLeft="5dp"
                 android:orientation="horizontal">
+
                 <TextView
                     android:id="@+id/txtv_switch23"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:layout_gravity="center_vertical"/>
+                    android:textColor="@android:color/black" />
+
                 <com.suke.widget.SwitchButton
                     android:id="@+id/switch_button_23"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/switch_border"
-                android:layout_marginRight="5dp"
                 android:orientation="horizontal">
+
                 <TextView
                     android:id="@+id/txtv_switch14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:layout_gravity="center"/>
+                    android:textColor="@android:color/black" />
+
                 <com.suke.widget.SwitchButton
                     android:id="@+id/switch_button_14"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/switch_border"
-                android:layout_marginLeft="5dp"
                 android:orientation="horizontal">
+
                 <TextView
                     android:id="@+id/txtv_switch24"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:layout_gravity="center_vertical"/>
+                    android:textColor="@android:color/black" />
+
                 <com.suke.widget.SwitchButton
                     android:id="@+id/switch_button_24"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

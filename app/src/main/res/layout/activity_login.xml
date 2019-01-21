@@ -13,67 +13,32 @@
         android:layout_height="150dp"
         android:background="#ffffff"
         app:titleTextColor="#000000">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/toolbar_title"
+                style="@style/Toolbar.TitleText.Login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text="Smart Home"
-                android:textColor="@android:color/black"
-                style="@style/Toolbar.TitleText.Login"
-                android:layout_gravity="center"/>
+                android:textColor="@android:color/black" />
+
             <TextView
                 android:id="@+id/toolbar_subtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text="@string/default_status"
-                android:textSize="15sp"
                 android:textColor="@android:color/black"
-                android:layout_gravity="center"/>
+                android:textSize="15sp" />
         </LinearLayout>
     </android.support.v7.widget.Toolbar>
-
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginLeft="20dp"-->
-        <!--android:layout_marginRight="20dp"-->
-        <!--android:orientation="vertical"-->
-        <!--android:padding="@dimen/activity_vertical_margin">-->
-
-        <!--<EditText-->
-            <!--android:id="@+id/edtxt_wss"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="@drawable/custom_border"-->
-            <!--android:hint="@string/hint_edit1"-->
-            <!--android:textStyle="normal" />-->
-
-        <!--&lt;!&ndash;<EditText&ndash;&gt;-->
-            <!--&lt;!&ndash;android:id="@+id/edtxt_wsp"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:background="@drawable/custom_border"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_marginTop="8dp"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:hint="@string/hint_edit2"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:textStyle="normal" />&ndash;&gt;-->
-
-        <!--<android.support.v7.widget.AppCompatButton-->
-            <!--android:id="@+id/btn_connect"-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="16dp"-->
-            <!--android:padding="12dp"-->
-            <!--android:background="@drawable/button_border"-->
-            <!--android:text="@string/text_button_connect"-->
-            <!--android:textAllCaps="false"-->
-            <!--android:textColor="@android:color/white"-->
-            <!--android:stateListAnimator="@null"/>-->
-    <!--</LinearLayout>-->
 
     <LinearLayout
         android:id="@+id/loginview"
@@ -90,29 +55,29 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Login"
+            android:textColor="@android:color/black"
             android:textSize="20dp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black"/>
+            android:textStyle="bold" />
 
         <EditText
-            android:text="user"
             android:id="@+id/edt_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="@drawable/custom_border"
-            android:hint="@string/username_editText" />
+            android:hint="@string/username_editText"
+            android:text="user" />
 
         <EditText
-            android:text="user123"
             android:id="@+id/edt_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/custom_border"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
+            android:background="@drawable/custom_border"
             android:hint="@string/password_editText"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:text="user123" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -135,11 +100,11 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/button_border"
                 android:padding="5dp"
+                android:stateListAnimator="@null"
                 android:text="@string/login_btn"
                 android:textAlignment="center"
                 android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:stateListAnimator="@null"/>
+                android:textColor="@android:color/white" />
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

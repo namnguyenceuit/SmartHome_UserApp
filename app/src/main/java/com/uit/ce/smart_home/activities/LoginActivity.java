@@ -42,8 +42,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public static final int CONNECTED = 1;
 
     public static boolean isLoggedOut = false;
-    public static WebSocketClient client;
-    public static User user;
 
     Intent loginIntent;
     Intent connectServer;
@@ -100,7 +98,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             if (activeNetwork != null && activeNetwork.isConnected()) {
                 // if online
                 if (!toolbarSubTitle.getText().equals("Connected")) {
-                    toolbarSubTitle.setText("Tab to reconnect");
+                    toolbarSubTitle.setText("Tap to reconnect");
                     toolbarSubTitle.setOnClickListener(new View.OnClickListener() {
                         private boolean clickStateChanged;
 

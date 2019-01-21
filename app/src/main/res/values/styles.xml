@@ -27,7 +27,7 @@
         <item name="normalSolidColor">#88000000</item>
         <item name="pressedSolidColor">@color/color_464646</item>
         <item name="normalTextColor">#FFFFFFFF</item>
-        <item name="selectedTextColor">@color/color_ffffff</item>
+        <item name="selectedTextColor">@color/color_s_white</item>
         <item name="strokeWidth">0dp</item>
         <item name="strokeColor">@color/color_464646</item>
         <item name="isSelected">true</item>
@@ -39,7 +39,7 @@
         <item name="normalSolidColor">#fc0000</item>
         <item name="pressedSolidColor">@color/color_464646</item>
         <item name="normalTextColor">#88FFFFFF</item>
-        <item name="selectedTextColor">@color/color_ffffff</item>
+        <item name="selectedTextColor">@color/color_s_white</item>
         <item name="strokeWidth">0dp</item>
         <item name="strokeColor">@color/color_464646</item>
         <item name="isSelected">true</item>
@@ -51,7 +51,7 @@
         <item name="normalSolidColor">#0021fc</item>
         <item name="pressedSolidColor">@color/color_464646</item>
         <item name="normalTextColor">#88FFFFFF</item>
-        <item name="selectedTextColor">@color/color_ffffff</item>
+        <item name="selectedTextColor">@color/color_s_white</item>
         <item name="strokeWidth">0dp</item>
         <item name="strokeColor">@color/color_464646</item>
         <item name="isSelected">true</item>
@@ -63,7 +63,7 @@
         <item name="normalSolidColor">#0ca31b</item>
         <item name="pressedSolidColor">@color/color_464646</item>
         <item name="normalTextColor">#88FFFFFF</item>
-        <item name="selectedTextColor">@color/color_ffffff</item>
+        <item name="selectedTextColor">@color/color_s_white</item>
         <item name="strokeWidth">0dp</item>
         <item name="strokeColor">@color/color_464646</item>
         <item name="isSelected">true</item>

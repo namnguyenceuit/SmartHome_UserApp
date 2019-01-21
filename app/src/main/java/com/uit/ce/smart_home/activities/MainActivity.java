@@ -6,6 +6,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +18,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.ToxicBakery.viewpager.transforms.DefaultTransformer;
@@ -23,7 +26,16 @@ import com.uit.ce.smart_home.R;
 import com.uit.ce.smart_home.fragments.Profile;
 import com.uit.ce.smart_home.fragments.HomeController;
 import com.uit.ce.smart_home.fragments.Fragment3;
+import com.uit.ce.smart_home.services.ConnectServerService;
 
+import static com.uit.ce.smart_home.services.ConnectServerService.ACTION_LOGIN;
+import static com.uit.ce.smart_home.services.ConnectServerService.APP_PASSWORD;
+import static com.uit.ce.smart_home.services.ConnectServerService.APP_USERNAME;
+import static com.uit.ce.smart_home.services.ConnectServerService.CONNECTED;
+import static com.uit.ce.smart_home.services.ConnectServerService.IS_NETWORK_CONNECTED;
+import static com.uit.ce.smart_home.services.ConnectServerService.LOGIN_ALREADY;
+import static com.uit.ce.smart_home.services.ConnectServerService.LOGIN_FAIL;
+import static com.uit.ce.smart_home.services.ConnectServerService.LOGIN_SUCCESS;
 import static com.uit.ce.smart_home.services.ConnectServerService.MESSAGE_RESPOND;
 
 public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
@@ -43,10 +55,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-        if(LoginActivity.STATUS == LoginActivity.CONNECTED)
-            toolbar.setSubtitle("Connected");
-        else
-            toolbar.setSubtitle("Error");
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         viewPager.addOnPageChangeListener(this);
         viewPager.setPageTransformer(true, new DefaultTransformer());
@@ -81,31 +89,130 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
 
-            if(MESSAGE_RESPOND.equals(action))
-            {
+            if (MESSAGE_RESPOND.equals(action)) {
                 Toast.makeText(MainActivity.this, intent.getStringExtra("MESSAGE_RES"), Toast.LENGTH_SHORT).show();
             }
 
+            if (CONNECTED.equals(action)) {
+                toolbar.setSubtitle("Tap to re-login");
+            }
+
+            if (LOGIN_SUCCESS.equals(action)) {
+                toolbar.setSubtitle("Connected");
+            }
+
+            if (LOGIN_ALREADY.equals(action)) {
+                Toast.makeText(getApplicationContext(), "Cannot login this moment, please try again", Toast.LENGTH_LONG);
+                try{
+                    LoginActivity.isLoggedOut = true;
+                    Intent intentAlready = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intentAlready);
+                }
+                catch (Exception e){
+                    Intent intentAlready = new Intent(MainActivity.this, LoginActivity.class);
+                    intentAlready.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    startActivity(intentAlready);
+                }
+            }
+
+            if (LOGIN_FAIL.equals(action)) {
+                try{
+                    LoginActivity.isLoggedOut = true;
+                    Intent intentFail = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intentFail);
+                }
+                catch (Exception e){
+                    Intent intentFail = new Intent(MainActivity.this, LoginActivity.class);
+                    intentFail.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    startActivity(intentFail);
+                }
+            }
+
+        }
+    };
+
+    private BroadcastReceiver networkStateReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            ConnectivityManager manager = (ConnectivityManager)
+                    context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo activeNetwork = manager.getActiveNetworkInfo();
+            if (activeNetwork != null && activeNetwork.isConnected()) {
+                // if online
+                if (!toolbar.getSubtitle().equals("Connected")) {
+                    toolbar.setSubtitle("Tap to reconnect");
+                    toolbar.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View view) {
+                            if (toolbar.getSubtitle().equals("Tap to reconnect")) {
+                                ReconnectServer();
+                            }
+
+                            if (toolbar.getSubtitle().equals("Tap to re-login")){
+                                ReLoginServer();
+                            }
+                        }
+                    });
+                }
+            } else {
+                // if not online
+                toolbar.setSubtitle("Connection went wrong");
+            }
         }
     };
 
     @Override
     protected void onResume() {
         super.onResume();
+
+        registerReceiver(networkStateReceiver, new IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION));
         registerReceiver(UpdateResponseService, UpdateResponseServiceFilter());
+        registerReceiver(UpdateResponseService, ReLogin());
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+
         unregisterReceiver(UpdateResponseService);
+        unregisterReceiver(networkStateReceiver);
     }
 
     private static IntentFilter UpdateResponseServiceFilter() {
         final IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(CONNECTED);
         intentFilter.addAction(MESSAGE_RESPOND);
         return intentFilter;
     }
+
+    private static IntentFilter ReLogin() {
+        final IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(LOGIN_SUCCESS);
+        intentFilter.addAction(LOGIN_FAIL);
+        intentFilter.addAction(LOGIN_ALREADY);
+        return intentFilter;
+    }
+
+    private void ReconnectServer() {
+        Intent reconnect = new Intent(getApplicationContext(), ConnectServerService.class);
+        reconnect.setAction(IS_NETWORK_CONNECTED);
+        toolbar.setSubtitle("Trying to reconnect...");
+        startService(reconnect);
+    }
+
+    private void ReLoginServer() {
+        //String username = editText_username.getText().toString();
+        //String password = editText_password.getText().toString();
+        Intent reLoginIntent = new Intent(getApplicationContext(), ConnectServerService.class);
+        reLoginIntent.setAction(ACTION_LOGIN);
+
+        // TODO: those values are just for testing, need to get it form SharedPreferences
+        reLoginIntent.putExtra(APP_USERNAME, "user");
+        reLoginIntent.putExtra(APP_PASSWORD, "user123");
+        startService(reLoginIntent);
+    }
+
 
     private void createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
@@ -148,6 +255,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     public void onPageScrollStateChanged(int state) {
 
     }
+
     @Override
     public void onBackPressed() {
         Intent startMain = new Intent(Intent.ACTION_MAIN);

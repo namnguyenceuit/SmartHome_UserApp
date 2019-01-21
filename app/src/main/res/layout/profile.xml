@@ -4,22 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/pager_border">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:stateListAnimator="@null"
-        android:orientation="vertical"
         android:layout_marginTop="100dp"
-        android:padding="@dimen/activity_vertical_margin">
+        android:orientation="vertical"
+        android:padding="@dimen/activity_vertical_margin"
+        android:stateListAnimator="@null">
+
         <ImageView
             android:id="@+id/imv_user"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:layout_marginTop="10dp"
             android:layout_gravity="center"
-            android:padding="5dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/ic_user_profile"
+            android:padding="5dp"
             tools:ignore="MissingPrefix" />
+
         <TextView
             android:id="@+id/txtv_name"
             android:layout_width="wrap_content"
@@ -29,19 +32,19 @@
             android:gravity="center"
             android:textSize="22sp"
             android:textStyle="bold" />
+
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_logout"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_gravity="center"
+            android:layout_marginTop="20dp"
             android:background="@drawable/button_border"
+            android:stateListAnimator="@null"
             android:text="@string/logout_btn"
             android:textAlignment="center"
             android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:stateListAnimator="@null"/>
+            android:textColor="@android:color/white" />
     </LinearLayout>
-
 
 </LinearLayout>
